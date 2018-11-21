@@ -53,7 +53,7 @@ public class SampleController {
 	@GetMapping("/pay")
 	public void pay(Model model){
 		
-		log.info("cartPage....");
+		log.info("payPage....");
 		model.addAttribute("menu", service.getMenu());
 	
 	}

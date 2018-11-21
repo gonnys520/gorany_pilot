@@ -50,4 +50,11 @@ public class SampleController {
 	
 	}
 	
+	@GetMapping("/pay")
+	public void pay(Model model){
+		
+		log.info("cartPage....");
+		model.addAttribute("menu", service.getMenu());
+	
+	}
 }

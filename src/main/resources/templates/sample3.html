@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../css/style2.css" />
+<script type="text/javascript" src="../js/packed.js"></script>
+</head>
+<body>
+	<h1>고라니카페 메뉴입니다</h1>
+	
+	
+	<div class="container">
+  <div class="mySlides">
+    <div class="numbertext">1 / 6</div>
+    <img src="../css/images/cafe1.jpg" width="500" height="300">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">2 / 6</div>
+    <img src="../css/images/cafe2.jpg" width="500" height="300">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">3 / 6</div>
+    <img src="../css/images/cafe3.jpg" width="500" height="300">
+  </div>
+    
+  <div class="mySlides">
+    <div class="numbertext">4 / 6</div>
+    <img src="../css/images/cafe4.jpeg" width="500" height="300">
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">5 / 6</div>
+    <img src="../css/images/cafe5.jpg" width="500" height="300">
+  </div>
+    
+  <div class="mySlides">
+    <div class="numbertext">6 / 6</div>
+    <img src="../css/images/cafe6.jpg" width="500" height="300">
+  </div>
+    
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
+
+  <div class="caption-container">
+    <p id="caption"></p>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <img class="demo cursor" src="../css/images/cafe1.jpg"width="100" height="60" onclick="currentSlide(1)" alt="고라니 카페">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="../css/images/cafe2.jpg" width="100" height="60" onclick="currentSlide(2)" alt="고라니 카페">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="../css/images/cafe3.jpg" width="100" height="60" onclick="currentSlide(3)" alt="고라니 카페">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="../css/images/cafe4.jpeg" width="100" height="60" onclick="currentSlide(4)" alt="고라니 카페">
+    </div>
+    <div class="column">
+      <img class="demo cursor" src="../css/images/cafe5.jpg"  width="100" height="60" onclick="currentSlide(5)" alt="고라니 카페">
+    </div>    
+    <div class="column">
+      <img class="demo cursor" src="../css/images/cafe6.jpg"  width="100" height="60" onclick="currentSlide(6)" alt="고라니 카페">
+    </div>
+  </div>
+</div>
+
+<h1>메뉴</h1>
+<ul th:each="menu, iterState : ${menu}">
+	<li>
+		<span th:text="${iterState.current.mname}"></span>
+		<span th:text="${iterState.current.mcat}"></span>
+		<span th:text="${iterState.current.mprice}"></span>
+	</li>
+		
+</ul>
+<script type="text/javascript">
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+</body>
+</html>

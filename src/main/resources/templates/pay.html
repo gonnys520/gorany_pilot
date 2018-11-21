@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<style>
+.col-lg-9 {
+	text-align: center;
+}
+
+.f1 {
+	background-color: #E9CC44;
+	height: 100px;
+}
+
+.f2 {
+	text-align: center;
+}
+
+.cartBtn {
+	height: 100px;
+	width: 100%;
+	background-color: transparent;
+}
+
+.checked {
+	color: orange;
+}
+</style>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>실시간 주문&예약 시스템 고라니 입니다.</title>
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="../css/shop-homepage.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Page Content -->
+	<div class="container">
+
+		<div class="col-lg-9">
+
+			<div class="container">
+				<h1>결제하기</h1>
+			</div>
+
+			<div class="row">
+				<h4>주문정보</h4>
+			</div>
+
+			<div class="container">
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">메뉴</th>
+							<th scope="col">수량</th>
+							<th scope="col">가격</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>아메리카노</td>
+							<td>1</td>
+							<td>2000</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>카페라떼</td>
+							<td>2</td>
+							<td>5000</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>치킨파니니</td>
+							<td>1</td>
+							<td>4300</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+				<div class="row">
+					<h3>TOTAL 11300원</h3>
+				</div>
+
+
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text">요청사항</span>
+					</div>
+					<textarea class="form-control" aria-label="With textarea"></textarea>
+				</div>
+
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input"
+						id="customCheck1"> <label class="custom-control-label"
+						for="customCheck1">바로 주문</label>
+
+				</div>
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input"
+						id="customCheck2"> <label class="custom-control-label"
+						for="customCheck2">예약 주문</label> <select>
+						<option selected>오전/오후</option>
+						<option value="1">오전</option>
+						<option value="2">오후</option>
+
+					</select> <select>
+						<option selected>시</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+
+					</select> <select>
+						<option selected>분</option>
+						<option value="1">10</option>
+						<option value="2">20</option>
+						<option value="3">30</option>
+						<option value="4">40</option>
+						<option value="5">50</option>
+						<option value="6">00</option>
+					</select>
+				</div>
+				<div class="row">
+					<h4>결제수단</h4>
+					
+				</div>
+
+				<div class="container">
+					<div class="wrapper">
+						<div class="facet f1">
+							<button class="cartBtn" onclick="location.href='/pay'">결제하기</button>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your
+				Website 2017</p>
+		</div>
+		<!-- /.container -->
+	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="../jquery/jquery.min.js"></script>
+	<script src="../js/bootstrap.bundle.min.js"></script>
+	<script src="../js/amount.js"></script>
+
+</body>
+
+</html>

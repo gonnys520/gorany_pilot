@@ -32,6 +32,7 @@
     <meta name="author" content="">
 
     <title>고라시스</title>
+    <title>실시간 주문&예약 시스템 고라니 입니다.</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -61,9 +62,9 @@
           <p>수량 </p>
           <div class="number">
 			
-			<button id="increaseQuantity">+</button>
+			<button id="decreaseQuantity">-</button>
 			<span id="numberUpDown">1</span>
-    		<button id="decreaseQuantity">-</button>
+    		<button id="increaseQuantity">+</button>
 
 		</div>
 		 <p>소계</p>
@@ -88,7 +89,7 @@
    	</div>
       <div class="container">
       	<div class="wrapper">
-      		<div class="facet f1"> <button class="cartBtn">주문하기</button> </div>
+      		<div class="facet f1"> <button class="cartBtn" onclick="location.href='/pay'">주문하기</button> </div>
       	</div>
      
       
@@ -105,7 +106,7 @@
     <!-- Bootstrap core JavaScript -->
     <script src="../jquery/jquery.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
-      <script src="../js/amount.js"></script>
+    <script src="../js/amount.js"></script>
 
   </body>
 

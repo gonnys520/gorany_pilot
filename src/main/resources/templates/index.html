@@ -146,7 +146,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">Save changes</button>
-        <button id="modalCloseBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary modelClose" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -162,10 +162,12 @@
 		$("#myModal").show();
 	});
 	
-	modalCloseBtn.on("click", function(e){
-		 console.log("modal close");
-		 $("#myModal").hide();
-	});
+	  $(".modelClose").on("click", function(e){
+		  
+		   console.log("--------------------------");
+		  $("#myModal").hide();
+		   
+	   });
 	</script>
   </body>
 

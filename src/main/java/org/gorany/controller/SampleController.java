@@ -23,7 +23,7 @@ public class SampleController {
 		
 	}
 	
-	@GetMapping("/index")
+	@GetMapping("/sample2")
 	public void sample2(Model model) {
 		log.info("sample2.....");
 		
@@ -32,6 +32,21 @@ public class SampleController {
 	
 	@GetMapping("/home")
 	public void sample3(Model model) {
+	
+	}
+	
+	@GetMapping("/index")
+	public void index(Model model){
+		
+		model.addAttribute("menu", service.getMenu());
+	
+	}
+	
+	@GetMapping("/cart")
+	public void cart(Model model){
+		
+		log.info("cartPage....");
+		model.addAttribute("menu", service.getMenu());
 	
 	}
 	

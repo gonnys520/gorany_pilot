@@ -16,7 +16,7 @@ public class SampleController {
 	@Setter(onMethod_=@Autowired)
 	private MenuService service;
 
-	@GetMapping("/sample1")
+	@GetMapping("/gorany")
 	public void sample1(Model model) {
 		
 		model.addAttribute("greeting", "HelloWorld");

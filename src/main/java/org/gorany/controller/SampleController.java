@@ -15,7 +15,12 @@ public class SampleController {
 	
 	@Setter(onMethod_=@Autowired)
 	private MenuService service;
-
+	
+	@GetMapping("/login")
+	public void login() {
+		log.info("login....");
+	}
+	
 	@GetMapping("/gorany")
 	public void sample1(Model model) {
 		

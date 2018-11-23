@@ -72,7 +72,7 @@ public class KakaoPay {
 	public KakaoPayInfoVO kakaoPayInfo(String pg_token) {
 
 		log.info("KakaoPayInfoVO............................................");
-
+		log.info("-----------------------------");
 		
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -94,7 +94,7 @@ public class KakaoPay {
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 		
 		try {
-			kakaoPayInfoVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayInfoVO.class);
+			kakaoPayInfoVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayInfoVO.class);
 			
 			log.info("" + kakaoPayInfoVO);
 			

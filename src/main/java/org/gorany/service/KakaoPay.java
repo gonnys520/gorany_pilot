@@ -49,16 +49,16 @@ public class KakaoPay {
 		params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
 		
 		// 서버로 요청할 Body
-		kakaoPayReadyVO.setCid("TC0ONETIME");
-		kakaoPayReadyVO.setPartner_order_id("1001");
-		kakaoPayReadyVO.setPartner_user_id("gorany");
-		kakaoPayReadyVO.setItem_name("갤럭시S9");
-		kakaoPayReadyVO.setQuantity(1);
-		kakaoPayReadyVO.setTotal_amount(2100);
-		kakaoPayReadyVO.setTax_free_amount(100);
-		kakaoPayReadyVO.setApproval_url("http://localhost:8080/kakaopay/kakaoPaySuccess");
-		kakaoPayReadyVO.setCancel_url("http://localhost:8080/kakaoPayCancel");
-		kakaoPayReadyVO.setFail_url("http://localhost:8080/kakaoPaySuccessFail");
+//		kakaoPayReadyVO.setCid("TC0ONETIME");
+//		kakaoPayReadyVO.setPartner_order_id("1001");
+//		kakaoPayReadyVO.setPartner_user_id("gorany");
+//		kakaoPayReadyVO.setItem_name("갤럭시S9");
+//		kakaoPayReadyVO.setQuantity(1);
+//		kakaoPayReadyVO.setTotal_amount(2100);
+//		kakaoPayReadyVO.setTax_free_amount(100);
+//		kakaoPayReadyVO.setApproval_url("http://localhost:8080/kakaopay/kakaoPaySuccess");
+//		kakaoPayReadyVO.setCancel_url("http://localhost:8080/kakaoPayCancel");
+//		kakaoPayReadyVO.setFail_url("http://localhost:8080/kakaoPaySuccessFail");
 
  		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
@@ -107,8 +107,15 @@ public class KakaoPay {
 		
 		try {
 			kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
-			
 			log.info("" + kakaoPayApprovalVO);
+			
+			
+//			String test = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, String.class);
+//			
+//			log.info("=================================++++++++++++++++++++++++++++++++++++2");
+//		
+//			log.info(""+test);
+			
 			
 			return kakaoPayApprovalVO;
 		

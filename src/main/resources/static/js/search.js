@@ -29,12 +29,11 @@ var searchService = (function(){
 		console.log("search...............");
 		
 		$.ajax({
-            type: 'post',
-            url: "/search",
-            dataType: "json",
-            success: function(keyword,status,xhr){
+            type: 'get',
+            url: "/search/" + keyword,
+            success: function(result,status,xhr){
 				if(callback){
-					callback(keyword);
+					callback(result);
 				}
 			},
 			error: function(xhr,status,er){

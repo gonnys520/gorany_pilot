@@ -22,6 +22,12 @@ public class MenuServiceImpl implements MenuService {
 		
 		return mapper.getMenu();
 	}
+
+	@Override
+	public String[] getMenuName() {
+		// TODO Auto-generated method stub
+		return mapper.getMenuName();
+	}
 	
 	
 }

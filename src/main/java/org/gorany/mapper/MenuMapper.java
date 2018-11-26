@@ -8,5 +8,5 @@ public interface MenuMapper {
 
 	public List<MenuVO> getMenu();
 	
-	public List<String> getMenuName();
+	public String[] getMenuName();
 }

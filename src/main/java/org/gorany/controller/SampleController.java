@@ -39,7 +39,7 @@ public class SampleController {
 	public void sample3(Model model) {
 	
 		//검색을 위해서 db내용 끌고오기
-		
+		service.getMenuName();
 	}
 	
 	@GetMapping("/index")

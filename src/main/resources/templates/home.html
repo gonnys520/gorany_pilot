@@ -297,30 +297,28 @@
 
 	<script th:inline="javascript">
 	  $(function() {
-		    
-		    $( "#tags" ).autocomplete({
-		      source: function( request, response ) {
-		             $.ajax({
-		                    type: 'post',
-		                    url: "/autocomplete.jsp",
-		                    dataType: "json",
-		                    //request.term = $("#autocomplete").val()
-		                    data: { value : request.term },
-		                    success: function(data) {
-		                        //서버에서 json 데이터 response 후 목록에 뿌려주기 위함
-		                        response(
-		                            $.map(data, function(item) {
-		                                return {
-		                                    label: item.data,
-		                                    value: item.data
-		                                }
-		                            })
-		                        );
-		                    }
-		               });//end ajax
-		            }//end source
-		            
-		    });
+		  
+		  function display(data){
+			  console.log("-----------------------");
+			  console.log(data);
+			  console.log("-----------------------");
+			  $( "#tags" ).autocomplete({
+			      source: data
+			    });
+		  }
+		  
+		  var availableTags = (function() {
+	             $.ajax({
+	                    type: 'post',
+	                    url: "/autocomplete",
+	                    dataType: "json",
+	                    success: function(data) {
+	                    	display(data);
+	                    }
+	               });//end ajax
+	            });//end function
+		  
+	         availableTags();
 		  });
 	</script>
 </th:block>

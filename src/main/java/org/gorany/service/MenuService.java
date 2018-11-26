@@ -7,4 +7,6 @@ import org.gorany.domain.MenuVO;
 public interface MenuService {
 
 	public List<MenuVO> getMenu();
+	
+	public String[] getMenuName();
 }

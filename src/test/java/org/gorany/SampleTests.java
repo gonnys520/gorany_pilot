@@ -1,5 +1,6 @@
 package org.gorany;
 
+import org.gorany.mapper.MenuMapper;
 import org.gorany.mapper.TimeMapper;
 import org.gorany.mapper.UserMapper;
 import org.junit.Test;
@@ -22,6 +23,9 @@ public class SampleTests {
 	@Setter(onMethod_=@Autowired)
 	private TimeMapper timemapper;
 	
+	@Setter(onMethod_=@Autowired)
+	private MenuMapper menumapper;
+	
 
 	
 	@Test
@@ -32,6 +36,11 @@ public class SampleTests {
 	@Test
 	public void testGet() {
 		log.info("" + mapper.getUserList());
+	}
+	
+	@Test
+	public void testMenuName() {
+		log.info("" + menumapper.getMenuName());
 	}
 	
 }

@@ -3,7 +3,7 @@ package org.gorany.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.gorany.domain.kakaopay.KakaoPayInfoVO;
+import org.gorany.domain.kakaopay.KakaoPayApprovalVO;
 import org.gorany.domain.kakaopay.KakaoPayReadyVO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +23,7 @@ public class KakaoPay {
 	private static final String HOST = "https://kapi.kakao.com";
 	
 	private KakaoPayReadyVO kakaoPayReadyVO;
-	private KakaoPayInfoVO kakaoPayInfoVO;
+	private KakaoPayApprovalVO kakaoPayApprovalVO;
 	
 	public String kakaoPayReady() {
 
@@ -42,13 +42,25 @@ public class KakaoPay {
 		params.add("partner_user_id", "gorany");
 		params.add("item_name", "갤럭시S9");
 		params.add("quantity", "1");
-		params.add("total_amount", "1000");
-		params.add("tax_free_amount", "0");
+		params.add("total_amount", "2100");
+		params.add("tax_free_amount", "100");
 		params.add("approval_url", "http://localhost:8080/kakaopay/kakaoPaySuccess");
 		params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
 		params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
+		
+		// 서버로 요청할 Body
+		kakaoPayReadyVO.setCid("TC0ONETIME");
+		kakaoPayReadyVO.setPartner_order_id("1001");
+		kakaoPayReadyVO.setPartner_user_id("gorany");
+		kakaoPayReadyVO.setItem_name("갤럭시S9");
+		kakaoPayReadyVO.setQuantity(1);
+		kakaoPayReadyVO.setTotal_amount(2100);
+		kakaoPayReadyVO.setTax_free_amount(100);
+		kakaoPayReadyVO.setApproval_url("http://localhost:8080/kakaopay/kakaoPaySuccess");
+		kakaoPayReadyVO.setCancel_url("http://localhost:8080/kakaoPayCancel");
+		kakaoPayReadyVO.setFail_url("http://localhost:8080/kakaoPaySuccessFail");
 
-		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
+ 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
 		try {
 			kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
@@ -69,7 +81,7 @@ public class KakaoPay {
 		
 	}
 	
-	public KakaoPayInfoVO kakaoPayInfo(String pg_token) {
+	public KakaoPayApprovalVO kakaoPayInfo(String pg_token) {
 
 		log.info("KakaoPayInfoVO............................................");
 		log.info("-----------------------------");
@@ -89,16 +101,16 @@ public class KakaoPay {
 		params.add("partner_order_id", "1001");
 		params.add("partner_user_id", "gorany");
 		params.add("pg_token", pg_token);
-		params.add("total_amount", "1000");
+		params.add("total_amount", "2100");
 		
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 		
 		try {
-			kakaoPayInfoVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayInfoVO.class);
+			kakaoPayApprovalVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, KakaoPayApprovalVO.class);
 			
-			log.info("" + kakaoPayInfoVO);
+			log.info("" + kakaoPayApprovalVO);
 			
-			return kakaoPayInfoVO;
+			return kakaoPayApprovalVO;
 		
 		} catch (RestClientException e) {
 			// TODO Auto-generated catch block

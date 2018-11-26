@@ -12,8 +12,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
-
 import org.gorany.domain.UserVO;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -43,7 +43,10 @@ public class KakaoLogin {
 			// JSON 형태 반환값 처리
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
-
+			
+			System.out.println("response: " + response);
+			System.out.println("returnNode: " + returnNode);
+			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
@@ -97,20 +100,17 @@ public class KakaoLogin {
 
 	public static UserVO changeData(JsonNode userInfo) {
 		UserVO vo = new UserVO();
-		System.out.println(userInfo);
-		vo.setUser_snsId(userInfo.path("id").asText()); // id -> vo 넣기
+		System.out.println("userInfo: " + userInfo);
+		vo.setStatus('O');
+		vo.setSns_id(userInfo.path("id").asText()); // id -> vo 넣기
 //		if (userInfo.path("kaccount_email_verified").asText().equals("true")) { // 이메일 받기 허용 한 경우
 //			vo.setUser_email(userInfo.path("kaccount_email").asText()); // email -> vo 넣기
 
 		JsonNode kakao_account = userInfo.path("kakao_account");
 		System.out.println("kakao_account는?: " + kakao_account);
 		
-		
-		System.out.println("user gender ============== " + kakao_account.path("gender").asText());
-		
 		if (kakao_account.path("is_email_verified").asText().equals("true")) { // 이메일 받기 허용 한 경우
-			vo.setUser_email(kakao_account.path("email").asText()); // email -> vo 넣기
-			vo.setUser_sex(kakao_account.path("gender").asText());
+			vo.setEmail(kakao_account.path("email").asText()); // email -> vo 넣기
 
 		} else { // 이메일 거부 할 경우 코드 추후 개발
 
@@ -118,8 +118,10 @@ public class KakaoLogin {
 
 		JsonNode properties = userInfo.path("properties"); // 추가정보 받아오기
 		if (properties.has("nickname")) {
-			vo.setUser_name(properties.path("nickname").asText());
-			vo.setUser_profileImagePath(properties.path("profile_image").asText());}
+			vo.setNickname(properties.path("nickname").asText());
+		}
+		
+		
 		return vo;
 	}
 }

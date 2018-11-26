@@ -7,4 +7,6 @@ import org.gorany.domain.MenuVO;
 public interface MenuMapper {
 
 	public List<MenuVO> getMenu();
+	
+	public List<String> getMenuName();
 }

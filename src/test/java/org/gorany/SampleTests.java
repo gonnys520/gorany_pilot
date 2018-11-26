@@ -32,4 +32,9 @@ public class SampleTests {
 	public void getTime() {
 		log.info(timemapper.getTime());
 	}
+	
+	@Test
+	public void getMenuName() {
+		log.info(""+mapper.getMenuName());
+	}
 }

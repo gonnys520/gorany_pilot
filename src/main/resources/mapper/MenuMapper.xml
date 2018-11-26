@@ -8,4 +8,9 @@
  	<select id="getMenu" resultType="org.gorany.domain.MenuVO">
  		select * from partner_store_menu
  	</select>
+ 	
+ 	<select id="getMenuName" resultType="String">
+ 		select mname from partner_store_menu
+ 	</select>
+ 	
  </mapper>

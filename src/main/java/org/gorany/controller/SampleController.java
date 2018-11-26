@@ -38,6 +38,8 @@ public class SampleController {
 	@GetMapping("/home")
 	public void sample3(Model model) {
 	
+		//검색을 위해서 db내용 끌고오기
+		
 	}
 	
 	@GetMapping("/index")
@@ -62,4 +64,5 @@ public class SampleController {
 		model.addAttribute("menu", service.getMenu());
 	
 	}
+	
 }

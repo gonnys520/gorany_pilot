@@ -103,6 +103,13 @@
 			<version>20180813</version>
 		</dependency>
 
+		<!-- 구글 스피치 -->
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-speech</artifactId>
+			<version>0.71.0-beta</version>
+		</dependency>
+
 
 	</dependencies>
 

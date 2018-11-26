@@ -1,6 +1,7 @@
 package org.gorany;
 
 import org.gorany.mapper.MenuMapper;
+import org.gorany.mapper.SearchMapper;
 import org.gorany.mapper.TimeMapper;
 import org.gorany.mapper.UserMapper;
 import org.junit.Test;
@@ -26,6 +27,8 @@ public class SampleTests {
 	@Setter(onMethod_=@Autowired)
 	private MenuMapper menumapper;
 	
+	@Setter(onMethod_=@Autowired)
+	private SearchMapper searchmapper;
 
 	
 	@Test
@@ -40,7 +43,13 @@ public class SampleTests {
 	
 	@Test
 	public void testMenuName() {
-		log.info("" + menumapper.getMenuName());
+		log.info("" + searchmapper.getMenuName());
+	}
+	
+	@Test
+	public void testSearch() {
+		String keyword = "아";
+		log.info("" + searchmapper.search(keyword));
 	}
 	
 }

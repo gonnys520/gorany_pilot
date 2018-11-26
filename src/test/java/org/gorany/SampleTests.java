@@ -1,7 +1,7 @@
 package org.gorany;
 
-import org.gorany.mapper.MenuMapper;
 import org.gorany.mapper.TimeMapper;
+import org.gorany.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +17,12 @@ import lombok.extern.java.Log;
 public class SampleTests {
 
 	@Setter(onMethod_=@Autowired)
-	private MenuMapper mapper;
+	private UserMapper mapper;
 	
 	@Setter(onMethod_=@Autowired)
 	private TimeMapper timemapper;
 	
-	
-	@Test
-	public void getMenu() {
-		log.info(mapper.getMenu() + "");
-	}
+
 	
 	@Test
 	public void getTime() {
@@ -34,7 +30,8 @@ public class SampleTests {
 	}
 	
 	@Test
-	public void getMenuName() {
-		log.info(""+mapper.getMenuName());
+	public void testGet() {
+		log.info("" + mapper.getUserList());
 	}
+	
 }

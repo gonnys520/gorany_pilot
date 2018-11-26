@@ -8,5 +8,4 @@ public interface MenuService {
 
 	public List<MenuVO> getMenu();
 	
-	public String[] getMenuName();
 }

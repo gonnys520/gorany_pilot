@@ -311,22 +311,24 @@
 	<script th:inline="javascript">
 	
 	//검색창 자동완성
-	function data(){
-		searchService.autoComplete(function(result){
-			  $( "#tags" ).autocomplete({
-			      source: result,
-			      select: function(event) {
-			    	  alert('ddd'+ event.originalEvent.originalEvent.type);
-			    	    if ( event.originalEvent.originalEvent.type === "Onkeypress" ) {
-			    	      alert( "submit form" );
-			    	      }
-			    	    }
-		      });
-		  });
+/*  	$( "#tags" ).autocomplete({
+ 		source: [ "foo", "bar", "baz" ,"아1" ,"아2", "아3"]
+	});
+ */	
+	function display(data){
+		$( "#tags" ).autocomplete({
+			source: data,
+			matchContains: true,
+			focus: function( event, ui ) {
+				return false; 
+			}
+		});
+ 	}
 		
-	};
-	
-	data();
+	searchService.autoComplete(function(result){
+		display(result);
+	}); 
+		
 
 	
 	//엔터 이벤트
@@ -357,6 +359,9 @@
 		searchService.searchStore(keyword,function(result){
 			
 			$(".searchResultStore ul").append("---------상점검색결과---------");
+			if(result==""){
+				$(".searchResultStore ul").append("</br>해당되는 상점이 없습니다.");
+			}
 			$.each(result, function (index, item) {
 				$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
 				});
@@ -365,6 +370,9 @@
 		searchService.searchMenu(keyword,function(result){
 			
 			$(".searchResultMenu ul").append("---------메뉴검색결과---------");
+			if(result==""){
+				$(".searchResultMenu ul").append("</br>해당되는 메뉴가 없습니다.");
+			}
 			$.each(result, function (index, item) {
 				$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");
 				});
@@ -390,6 +398,9 @@
 		searchService.searchStore(keyword,function(result){
 			
 			$(".searchResultStore ul").append("---------상점검색결과---------");
+			if(result==""){
+				$(".searchResultStore ul").append("</br>해당되는 상점이 없습니다.");
+			}
 			$.each(result, function (index, item) {
 				$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
 				});
@@ -398,6 +409,9 @@
 		searchService.searchMenu(keyword,function(result){
 			
 			$(".searchResultMenu ul").append("---------메뉴검색결과---------");
+			if(result==""){
+				$(".searchResultMenu ul").append("</br>해당되는 메뉴가 없습니다.");
+			}
 			$.each(result, function (index, item) {
 				$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");
 				});

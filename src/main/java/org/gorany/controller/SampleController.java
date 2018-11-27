@@ -24,7 +24,7 @@ public class SampleController {
 	@GetMapping("/gorany")
 	public void sample1(Model model) {
 		
-		model.addAttribute("greeting", "HelloWorld");
+		model.addAttribute("menu", service.getMenu());
 		
 	}
 	
@@ -60,6 +60,12 @@ public class SampleController {
 		
 		log.info("payPage....");
 		model.addAttribute("menu", service.getMenu());
+	
+	}
+	
+	
+	@GetMapping("/test")
+	public void test(Model model) {
 	
 	}
 	

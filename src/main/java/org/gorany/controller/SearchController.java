@@ -1,5 +1,7 @@
 package org.gorany.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.gorany.domain.MenuVO;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +22,7 @@ import lombok.extern.java.Log;
 
 @Controller
 @Log
+@Transactional
 public class SearchController {
 
 	@Setter(onMethod_=@Autowired)
@@ -28,7 +32,11 @@ public class SearchController {
 	@ResponseBody
 	public ResponseEntity<String[]> autoComplete(){
 		log.info("autocomplete");
-		return new ResponseEntity<>(service.getMenuName(),HttpStatus.OK);
+		
+		List<String> list = service.getMenuName();
+		list.addAll(service.getStoreName());
+		
+		return new ResponseEntity<>(list.toArray(new String[list.size()]),HttpStatus.OK);
 	}
 	
 	@GetMapping("/searchMenu/{keyword}")

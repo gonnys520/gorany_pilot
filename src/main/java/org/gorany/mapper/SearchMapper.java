@@ -11,5 +11,7 @@ public interface SearchMapper {
 
 	public List<StoreVO> searchStore(String keyword);
 	
-	public String[] getMenuName();
+	public List<String> getMenuName();
+	
+	public List<String> getStoreName();
 }

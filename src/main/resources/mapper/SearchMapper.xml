@@ -13,7 +13,7 @@
 		where
 		mname like concat("%",#{keyword},"%")
 	</select>
-	
+
 	<select id="searchStore" resultType="org.gorany.domain.StoreVO">
 		select
 		*
@@ -24,7 +24,13 @@
 	</select>
 
 	<select id="getMenuName" resultType="String">
-		select mname from partner_store_menu
+		select mname from
+		partner_store_menu
+	</select>
+
+	<select id="getStoreName" resultType="String">
+		select sname from
+		partner_store
 	</select>
 </mapper>
  

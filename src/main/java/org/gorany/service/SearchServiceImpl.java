@@ -19,7 +19,7 @@ public class SearchServiceImpl implements SearchService{
 	private SearchMapper mapper;
 
 	@Override
-	public String[] getMenuName() {
+	public List<String> getMenuName() {
 		
 		return mapper.getMenuName();
 	}
@@ -36,6 +36,13 @@ public class SearchServiceImpl implements SearchService{
 	public List<StoreVO> searchStore(String keyword) {
 		// TODO Auto-generated method stub
 		return mapper.searchStore(keyword);
+	}
+
+
+	@Override
+	public List<String> getStoreName() {
+		// TODO Auto-generated method stub
+		return mapper.getStoreName();
 	}
 
 }

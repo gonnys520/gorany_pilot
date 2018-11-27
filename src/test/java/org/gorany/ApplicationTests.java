@@ -35,4 +35,15 @@ public class ApplicationTests {
 		log.info(""+con);
 		
 	}
+	
+	@Test
+	public void testAscii(){
+		System.out.println((int) 'ㄱ');
+		System.out.println((int) 'ㄴ');
+		System.out.println((int) 'ㄷ');
+		
+		System.out.println((char) 12595);
+		System.out.println((char) 45208);
+		System.out.println((char) 45796);
+	}
 }

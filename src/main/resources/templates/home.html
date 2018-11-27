@@ -334,6 +334,12 @@
 		var keyword = $("#tags").val();
 		console.log(keyword);
 		
+		if(keyword===""){
+			$(".searchResult ul").empty();
+			$(".searchResult ul").append("검색어를 입력해주세요");
+			return;
+		}
+		
 		searchService.search(keyword,function(result){
 			
 			$(".searchResult ul").empty();
@@ -349,7 +355,13 @@
 		console.log("searchBtn........")
 		
 		var keyword = $("#tags").val();
-		console.log(keyword);
+		console.log(keyword==="");
+		
+		if(keyword===""){
+			$(".searchResult ul").empty();
+			$(".searchResult ul").append("검색어를 입력해주세요");
+			return;
+		}
 		
 		searchService.search(keyword,function(result){
 			

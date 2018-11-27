@@ -47,9 +47,15 @@ public class SampleTests {
 	}
 	
 	@Test
-	public void testSearch() {
+	public void testSearchMenu() {
 		String keyword = "아";
-		log.info("" + searchmapper.search(keyword));
+		log.info("" + searchmapper.searchMenu(keyword));
+	}
+	
+	@Test
+	public void testSearchStore() {
+		String keyword = "고라니";
+		log.info("" + searchmapper.searchStore(keyword));
 	}
 	
 }

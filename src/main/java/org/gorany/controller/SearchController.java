@@ -3,6 +3,7 @@ package org.gorany.controller;
 import java.util.List;
 
 import org.gorany.domain.MenuVO;
+import org.gorany.domain.StoreVO;
 import org.gorany.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,13 +31,24 @@ public class SearchController {
 		return new ResponseEntity<>(service.getMenuName(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/search/{keyword}")
+	@GetMapping("/searchMenu/{keyword}")
 	@ResponseBody
-	public ResponseEntity<List<MenuVO>> search(@PathVariable("keyword") String keyword){
-		log.info("search post.....");
-		log.info(""+keyword);
-		log.info(""+service.search(keyword));
-		return new ResponseEntity<>(service.search(keyword),HttpStatus.OK);
+	public ResponseEntity<List<MenuVO>> searchMenu(@PathVariable("keyword") String keyword){
+		log.info("searchMenu post.....");
+
+		log.info(""+service.searchMenu(keyword));
+		
+		return new ResponseEntity<>(service.searchMenu(keyword),HttpStatus.OK);
+	}
+	
+	@GetMapping("/searchStore/{keyword}")
+	@ResponseBody
+	public ResponseEntity<List<StoreVO>> searchStore(@PathVariable("keyword") String keyword){
+		log.info("searchStore post.....");
+
+		log.info(""+service.searchStore(keyword));
+		
+		return new ResponseEntity<>(service.searchStore(keyword),HttpStatus.OK);
 	}
 	
 }

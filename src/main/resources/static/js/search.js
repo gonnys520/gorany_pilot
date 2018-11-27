@@ -25,12 +25,12 @@ var searchService = (function(){
 		});//end ajax
 	};
 	
-	function search(keyword,callback,error){
-		console.log("search...............");
+	function searchMenu(keyword,callback,error){
+		console.log("searchMenu...............");
 		
 		$.ajax({
             type: 'get',
-            url: "/search/" + keyword,
+            url: "/searchMenu/" + keyword,
             success: function(result,status,xhr){
 				if(callback){
 					callback(result);
@@ -42,12 +42,34 @@ var searchService = (function(){
 				}
 			}
 		});//end ajax
-		
 	}
+	
+	function searchStore(keyword,callback,error){
+		console.log("searchStore...............");
+		
+		$.ajax({
+            type: 'get',
+            url: "/searchStore/" + keyword,
+            success: function(result,status,xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error: function(xhr,status,er){
+				if(error){
+					error(er);
+				}
+			}
+		});//end ajax
+	}
+	
+	
 	
 	return {
 		autoComplete : autoComplete,
-		search : search
+		searchMenu : searchMenu,
+		searchStore : searchStore
+		
 	};//end return
 	
 })();

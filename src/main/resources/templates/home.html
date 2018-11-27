@@ -33,11 +33,16 @@
 			<label for="tags">검색내용: </label> <input id="tags">
 			<a class="btn btn-info searchBtn" href="#">검색하기</a>
 		</div>
+		
 		<div class="searchResult">
-			검색결과:
-			<ul>
-			</ul>
+			<div class="searchResultStore">
+				<ul></ul>
+			</div>
+			<div class="searchResultMenu">
+				<ul></ul>
+			</div>
 		</div>
+		
 
 		<!-- Services -->
 		<section id="services">
@@ -307,21 +312,30 @@
 	
 	//검색창 자동완성
 	function data(){
-		
 		searchService.autoComplete(function(result){
 			  $( "#tags" ).autocomplete({
-			      source: result
+			      source: result,
+			      select: function(event) {
+			    	  alert('ddd'+ event.originalEvent.originalEvent.type);
+			    	    if ( event.originalEvent.originalEvent.type === "Onkeypress" ) {
+			    	      alert( "submit form" );
+			    	      }
+			    	    }
 		      });
-			  console.log(result);
 		  });
+		
 	};
 	
 	data();
+
 	
 	//엔터 이벤트
-	$("#tags").keyup(function(e){
-		if(e.keyCode == 13){
+	$("#tags").keydown(function(event){
+		
+		if(event.keyCode == 13){
 			console.log("엔터");
+			close = 1;
+			event.preventDefault();
 			search();
 			}
 		}
@@ -333,39 +347,61 @@
 		console.log(keyword);
 		
 		if(keyword===""){
-			$(".searchResult ul").empty();
-			$(".searchResult ul").append("검색어를 입력해주세요");
+			$(".searchResultStore ul").empty();
+			$(".searchResultMenu ul").empty();
+			$(".searchResultStore ul").append("검색어를 입력해주세요");
 			return;
 		}
 		
-		searchService.search(keyword,function(result){
+		searchService.searchStore(keyword,function(result){
 			
-			$(".searchResult ul").empty();
+			$(".searchResultStore ul").empty();
+			$(".searchResultStore ul").append("---------상점검색결과---------");
 			$.each(result, function (index, item) {
-				$(".searchResult ul").append("<li>" + item.mname + "</li>");
+				$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
 				});
 		});
+		
+		searchService.searchMenu(keyword,function(result){
+			
+			$(".searchResultMenu ul").empty();
+			$(".searchResultMenu ul").append("---------메뉴검색결과---------");
+			$.each(result, function (index, item) {
+				$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");
+				});
+		});
+		
 	}
 
- 	//검색하기 with 버튼
+ 	//메뉴검색하기 with 버튼
 	$(".searchBtn").on("click",function(e){
 		e.preventDefault();
 		console.log("searchBtn........")
 		
 		var keyword = $("#tags").val();
-		console.log(keyword==="");
 		
 		if(keyword===""){
-			$(".searchResult ul").empty();
-			$(".searchResult ul").append("검색어를 입력해주세요");
+			$(".searchResultStore ul").empty();
+			$(".searchResultMenu ul").empty();
+			$(".searchResultStore ul").append("검색어를 입력해주세요");
 			return;
 		}
 		
-		searchService.search(keyword,function(result){
+		searchService.searchStore(keyword,function(result){
 			
-			$(".searchResult ul").empty();
+			$(".searchResultStore ul").empty();
+			$(".searchResultStore ul").append("---------상점검색결과---------");
 			$.each(result, function (index, item) {
-				$(".searchResult ul").append("<li>" + item.mname + "</li>");
+				$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
+				});
+		});
+		
+		searchService.searchMenu(keyword,function(result){
+			
+			$(".searchResultMenu ul").empty();
+			$(".searchResultMenu ul").append("---------메뉴검색결과---------");
+			$.each(result, function (index, item) {
+				$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");
 				});
 		});
 		

@@ -5,13 +5,22 @@
 
 <mapper namespace="org.gorany.mapper.SearchMapper">
 
-	<select id="search" resultType="org.gorany.domain.MenuVO">
+	<select id="searchMenu" resultType="org.gorany.domain.MenuVO">
 		select
 		*
 		from
 		partner_store_menu
 		where
 		mname like concat("%",#{keyword},"%")
+	</select>
+	
+	<select id="searchStore" resultType="org.gorany.domain.StoreVO">
+		select
+		*
+		from
+		partner_store
+		where
+		sname like concat("%",#{keyword},"%")
 	</select>
 
 	<select id="getMenuName" resultType="String">

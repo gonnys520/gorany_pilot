@@ -346,16 +346,16 @@
 		var keyword = $("#tags").val();
 		console.log(keyword);
 		
+		$(".searchResultStore ul").empty();
+		$(".searchResultMenu ul").empty();
+		
 		if(keyword===""){
-			$(".searchResultStore ul").empty();
-			$(".searchResultMenu ul").empty();
 			$(".searchResultStore ul").append("검색어를 입력해주세요");
 			return;
 		}
 		
 		searchService.searchStore(keyword,function(result){
 			
-			$(".searchResultStore ul").empty();
 			$(".searchResultStore ul").append("---------상점검색결과---------");
 			$.each(result, function (index, item) {
 				$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
@@ -364,7 +364,6 @@
 		
 		searchService.searchMenu(keyword,function(result){
 			
-			$(".searchResultMenu ul").empty();
 			$(".searchResultMenu ul").append("---------메뉴검색결과---------");
 			$.each(result, function (index, item) {
 				$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");
@@ -373,23 +372,23 @@
 		
 	}
 
- 	//메뉴검색하기 with 버튼
+ 	//검색하기 with 버튼
 	$(".searchBtn").on("click",function(e){
 		e.preventDefault();
 		console.log("searchBtn........")
 		
 		var keyword = $("#tags").val();
 		
+		$(".searchResultStore ul").empty();
+		$(".searchResultMenu ul").empty();
+		
 		if(keyword===""){
-			$(".searchResultStore ul").empty();
-			$(".searchResultMenu ul").empty();
 			$(".searchResultStore ul").append("검색어를 입력해주세요");
 			return;
 		}
 		
 		searchService.searchStore(keyword,function(result){
 			
-			$(".searchResultStore ul").empty();
 			$(".searchResultStore ul").append("---------상점검색결과---------");
 			$.each(result, function (index, item) {
 				$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
@@ -398,7 +397,6 @@
 		
 		searchService.searchMenu(keyword,function(result){
 			
-			$(".searchResultMenu ul").empty();
 			$(".searchResultMenu ul").append("---------메뉴검색결과---------");
 			$.each(result, function (index, item) {
 				$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");

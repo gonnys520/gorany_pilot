@@ -36,6 +36,8 @@ public class SearchController {
 		List<String> list = service.getMenuName();
 		list.addAll(service.getStoreName());
 		
+		System.out.println(list);
+		
 		return new ResponseEntity<>(list.toArray(new String[list.size()]),HttpStatus.OK);
 	}
 	

@@ -1,5 +1,6 @@
 package org.gorany.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.gorany.domain.MenuVO;
@@ -21,7 +22,13 @@ public class SearchServiceImpl implements SearchService{
 	@Override
 	public List<String> getMenuName() {
 		
-		return mapper.getMenuName();
+		List<String> list = mapper.getMenuName();
+		
+		for(int i = 0; i< list.size(); i++) {
+			list.add(i , "메뉴 - "+list.get(i));
+		}
+		
+		return list;
 	}
 
 
@@ -34,15 +41,21 @@ public class SearchServiceImpl implements SearchService{
 
 	@Override
 	public List<StoreVO> searchStore(String keyword) {
-		// TODO Auto-generated method stub
+		
 		return mapper.searchStore(keyword);
 	}
 
 
 	@Override
 	public List<String> getStoreName() {
-		// TODO Auto-generated method stub
-		return mapper.getStoreName();
+		
+		List<String> list = mapper.getStoreName();
+		
+		for(int i = 0; i< list.size(); i++) {
+			list.add(i , "상점 - "+list.get(i));
+		}
+		
+		return list;
 	}
 
 }

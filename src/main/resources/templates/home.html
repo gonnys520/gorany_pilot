@@ -31,14 +31,13 @@
 		<!-- 검색기능 -->
 		<form class="search">
 		<div class="ui-widget">
-			<label for="tags">검색내용: </label> <input id="keyword">
+			<label for="tags">검색내용: </label> <input id="tags">
 			<a class="btn btn-info searchBtn" href="#">검색하기</a>
 		</div>
 		</form>
 		<div class="searchResult">
 			검색결과:
 			<ul>
-				<li></li>
 			</ul>
 		</div>
 
@@ -310,13 +309,12 @@
 	
 	//검색창 자동완성
 	function data(){
-		console.log("==========");
+		
 		searchService.autoComplete(function(result){
-			  
 			  $( "#tags" ).autocomplete({
 			      source: result
 		      });
-			  
+			  console.log(result);
 		  });
 	};
 	
@@ -327,12 +325,19 @@
 		e.preventDefault();
 		console.log("searchBtn........")
 		
-		var keyword = $("#keyword").val();
+		var keyword = $("#tags").val();
 		console.log(keyword);
 		
 		searchService.search(keyword,function(result){
 			
 			console.log(result);
+			console.log($(".searchResult ul li"));
+			console.log(result[0].mname);
+			
+			$(".searchResult ul").empty();
+			$.each(result, function (index, item) {
+				$(".searchResult ul").append("<li>" + item.mname + "</li>");
+				});
 		});
 		
 	});

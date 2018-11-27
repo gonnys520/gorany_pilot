@@ -32,6 +32,7 @@
 		<form class="search">
 		<div class="ui-widget">
 			<label for="tags">검색내용: </label> <input id="tags">
+			<a class="btn btn-info searchBtn" href="#">검색하기</a>
 		</div>
 		</form>
 		<div class="searchResult">
@@ -324,12 +325,11 @@
 		if(e.keyCode == 13){
 			console.log("엔터");
 			search();
-			
 			}
 		}
 	);
 	
-	//검색하기
+	//검색하기 with 엔터
 	function search(){
 		var keyword = $("#tags").val();
 		console.log(keyword);
@@ -343,8 +343,23 @@
 		});
 	}
 
-
-	
+ 	//검색하기 with 버튼
+	$(".searchBtn").on("click",function(e){
+		e.preventDefault();
+		console.log("searchBtn........")
+		
+		var keyword = $("#tags").val();
+		console.log(keyword);
+		
+		searchService.search(keyword,function(result){
+			
+			$(".searchResult ul").empty();
+			$.each(result, function (index, item) {
+				$(".searchResult ul").append("<li>" + item.mname + "</li>");
+				});
+		});
+		
+	}); 
 		  
 
 		  

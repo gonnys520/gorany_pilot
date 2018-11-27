@@ -310,110 +310,116 @@
 	<script th:inline="javascript" src="/js/search.js"></script>
 	<script th:inline="javascript">
 	
-	//검색창 자동완성
-	function display(data){
-		$( "#tags" ).autocomplete({
-			source: data,
-			matchContains: true,
-			focus: function( event, ui ) {
-				return false; 
-			}
-		});
- 	}
+	$(document).ready(function(){
 		
-	searchService.autoComplete(function(result){
-		display(result);
-	}); 
+		//검색창 자동완성
+		function display(data){
+			$( "#tags" ).autocomplete({
+				source: data,
+				matchContains: true,
+				focus: function( event, ui ) {
+					return false; 
+				}
+			});//end autocomplete
+			
+		};//end function
+	 	
+			
+		searchService.autoComplete(function(result){
+			display(result);
+		}); 
 		
 
-	
-	//엔터 이벤트
-	$("#tags").keydown(function(event){
-		
-		if(event.keyCode == 13){
-			console.log("엔터");
-			close = 1;
-			event.preventDefault();
-			search();
-			}
-		}
-	);
-	
-	//검색하기 with 엔터
-	function search(){
-		var keyword = $("#tags").val();
-		console.log(keyword);
-		
-		$(".searchResultStore ul").empty();
-		$(".searchResultMenu ul").empty();
-		
-		if(keyword===""){
-			$(".searchResultStore ul").append("검색어를 입력해주세요");
-			return;
-		}
-		
-		searchService.searchStore(keyword,function(result){
+		//엔터 이벤트
+		$("#tags").keydown(function(event){
 			
-			$(".searchResultStore ul").append("---------상점검색결과---------");
-			if(result==""){
-				$(".searchResultStore ul").append("</br>해당되는 상점이 없습니다.");
+			if(event.keyCode == 13){
+				console.log("엔터");
+				close = 1;
+				event.preventDefault();
+				search();
+				}
 			}
-			$.each(result, function (index, item) {
-				$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
-				});
-		});
+		);
 		
-		searchService.searchMenu(keyword,function(result){
+		//검색하기 with 엔터
+		function search(){
 			
-			$(".searchResultMenu ul").append("---------메뉴검색결과---------");
-			if(result==""){
-				$(".searchResultMenu ul").append("</br>해당되는 메뉴가 없습니다.");
+			var keyword = $("#tags").val();
+			console.log(keyword);
+			
+			$(".searchResultStore ul").empty();
+			$(".searchResultMenu ul").empty();
+			
+			if(keyword===""){
+				$(".searchResultStore ul").append("검색어를 입력해주세요");
+				return;
 			}
-			$.each(result, function (index, item) {
-				$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");
-				});
-		});
-		
-	}
+			
+			searchService.searchStore(keyword,function(result){
+				
+				$(".searchResultStore ul").append("---------상점검색결과---------");
+				if(result==""){
+					$(".searchResultStore ul").append("</br>해당되는 상점이 없습니다.");
+				}
+				$.each(result, function (index, item) {
+					$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
+					});
+			});
+			
+			searchService.searchMenu(keyword,function(result){
+				
+				$(".searchResultMenu ul").append("---------메뉴검색결과---------");
+				if(result==""){
+					$(".searchResultMenu ul").append("</br>해당되는 메뉴가 없습니다.");
+				}
+				$.each(result, function (index, item) {
+					$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");
+					});
+			});
+			
+		}
 
- 	//검색하기 with 버튼
-	$(".searchBtn").on("click",function(e){
-		e.preventDefault();
-		console.log("searchBtn........")
-		
-		var keyword = $("#tags").val();
-		
-		$(".searchResultStore ul").empty();
-		$(".searchResultMenu ul").empty();
-		
-		if(keyword===""){
-			$(".searchResultStore ul").append("검색어를 입력해주세요");
-			return;
-		}
-		
-		searchService.searchStore(keyword,function(result){
+	 	//검색하기 with 버튼
+		$(".searchBtn").on("click",function(e){
+			e.preventDefault();
+			console.log("searchBtn........")
 			
-			$(".searchResultStore ul").append("---------상점검색결과---------");
-			if(result==""){
-				$(".searchResultStore ul").append("</br>해당되는 상점이 없습니다.");
-			}
-			$.each(result, function (index, item) {
-				$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
-				});
-		});
-		
-		searchService.searchMenu(keyword,function(result){
+			var keyword = $("#tags").val();
 			
-			$(".searchResultMenu ul").append("---------메뉴검색결과---------");
-			if(result==""){
-				$(".searchResultMenu ul").append("</br>해당되는 메뉴가 없습니다.");
+			$(".searchResultStore ul").empty();
+			$(".searchResultMenu ul").empty();
+			
+			if(keyword===""){
+				$(".searchResultStore ul").append("검색어를 입력해주세요");
+				return;
 			}
-			$.each(result, function (index, item) {
-				$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");
-				});
-		});
-		
-	}); 
+			
+			searchService.searchStore(keyword,function(result){
+				
+				$(".searchResultStore ul").append("---------상점검색결과---------");
+				if(result==""){
+					$(".searchResultStore ul").append("</br>해당되는 상점이 없습니다.");
+				}
+				$.each(result, function (index, item) {
+					$(".searchResultStore ul").append("<li>" + item.sname + "</li>");
+					});
+			});
+			
+			searchService.searchMenu(keyword,function(result){
+				
+				$(".searchResultMenu ul").append("---------메뉴검색결과---------");
+				if(result==""){
+					$(".searchResultMenu ul").append("</br>해당되는 메뉴가 없습니다.");
+				}
+				$.each(result, function (index, item) {
+					$(".searchResultMenu ul").append("<li>" + item.mname + ", 가격: " + item.mprice + "</li>");
+					});
+			});
+			
+		}); 
+	});
+	
 		  
 
 		  

@@ -1,5 +1,6 @@
 package org.gorany.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.gorany.domain.MenuVO;
@@ -27,7 +28,15 @@ public class SearchServiceImpl implements SearchService{
 		List<String> list = menuName;
 		list.addAll(storeName);
 		
-		return list;
+		//중복제거
+		List<String> resultList = new ArrayList<String>();
+		for (int i = 0; i < list.size(); i++) {
+		    if (!resultList.contains(list.get(i))) {
+		        resultList.add(list.get(i));
+		    }
+		}
+
+		return resultList;
 	}
 
 

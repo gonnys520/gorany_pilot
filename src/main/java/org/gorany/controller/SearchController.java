@@ -42,7 +42,6 @@ public class SearchController {
 	@ResponseBody
 	public ResponseEntity<List<MenuVO>> searchMenu(@PathVariable("keyword") String keyword){
 		log.info("searchMenu post.....");
-		
 		log.info(""+service.searchMenu(keyword));
 		
 		return new ResponseEntity<>(service.searchMenu(keyword),HttpStatus.OK);

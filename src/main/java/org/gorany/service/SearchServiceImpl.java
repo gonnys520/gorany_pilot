@@ -21,14 +21,9 @@ public class SearchServiceImpl implements SearchService{
 
 	@Override
 	public List<String> getMenuName() {
+
 		
-		List<String> list = mapper.getMenuName();
-		
-		for(int i = 0; i< list.size(); i++) {
-			list.add(i , "메뉴 - "+list.get(i));
-		}
-		
-		return list;
+		return mapper.getMenuName();
 	}
 
 
@@ -48,14 +43,8 @@ public class SearchServiceImpl implements SearchService{
 
 	@Override
 	public List<String> getStoreName() {
-		
-		List<String> list = mapper.getStoreName();
-		
-		for(int i = 0; i< list.size(); i++) {
-			list.add(i , "상점 - "+list.get(i));
-		}
-		
-		return list;
+
+		return mapper.getStoreName();
 	}
 
 }

@@ -64,9 +64,4 @@ public class SampleController {
 	}
 	
 	
-	@GetMapping("/test")
-	public void test(Model model) {
-	
-	}
-	
 }

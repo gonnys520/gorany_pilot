@@ -4,6 +4,7 @@ import org.gorany.mapper.MenuMapper;
 import org.gorany.mapper.SearchMapper;
 import org.gorany.mapper.TimeMapper;
 import org.gorany.mapper.UserMapper;
+import org.gorany.service.SearchService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class SampleTests {
 	
 	@Setter(onMethod_=@Autowired)
 	private SearchMapper searchmapper;
+	
+	@Setter(onMethod_=@Autowired)
+	private SearchService searchService;
 
 	
 	@Test
@@ -56,6 +60,11 @@ public class SampleTests {
 	public void testSearchStore() {
 		String keyword = "고라니";
 		log.info("" + searchmapper.searchStore(keyword));
+	}
+	
+	@Test
+	public void testSearch() {
+		log.info("" + searchService.getMenuName());
 	}
 	
 }

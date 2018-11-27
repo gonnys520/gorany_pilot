@@ -62,9 +62,6 @@ public class SampleTests {
 		log.info("" + searchmapper.searchStore(keyword));
 	}
 	
-	@Test
-	public void testSearch() {
-		log.info("" + searchService.getMenuName());
-	}
+
 	
 }

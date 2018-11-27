@@ -24,12 +24,12 @@
 	</select>
 
 	<select id="getMenuName" resultType="String">
-		select mname from
+		select concat('메뉴 - ',mname) from
 		partner_store_menu
 	</select>
 
 	<select id="getStoreName" resultType="String">
-		select sname from
+		select concat('가게 - ',sname) from
 		partner_store
 	</select>
 </mapper>

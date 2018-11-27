@@ -33,11 +33,8 @@ public class SearchController {
 	public ResponseEntity<String[]> autoComplete(){
 		log.info("autocomplete");
 		
-		List<String> list = service.getMenuName();
-		list.addAll(service.getStoreName());
-		
-		System.out.println(list);
-		
+		List<String> list = service.getName();
+
 		return new ResponseEntity<>(list.toArray(new String[list.size()]),HttpStatus.OK);
 	}
 	
@@ -45,7 +42,7 @@ public class SearchController {
 	@ResponseBody
 	public ResponseEntity<List<MenuVO>> searchMenu(@PathVariable("keyword") String keyword){
 		log.info("searchMenu post.....");
-
+		
 		log.info(""+service.searchMenu(keyword));
 		
 		return new ResponseEntity<>(service.searchMenu(keyword),HttpStatus.OK);

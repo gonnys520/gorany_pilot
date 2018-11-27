@@ -11,7 +11,6 @@ public interface SearchService {
 	
 	public List<StoreVO> searchStore(String keyword);
 	
-	public List<String> getMenuName();
+	public List<String> getName();
 	
-	public List<String> getStoreName();
 }

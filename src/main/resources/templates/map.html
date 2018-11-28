@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+
+<style>
+    .wrapper{
+        color: white;
+        display: flex;
+        width: 100%;
+        height: 50vh;
+        justify-content: center;
+        align-items: center;
+        background-color: cadetblue;
+    }
+    .listUL{
+        list-style: none;
+        color: white;
+        font-size: 2em;
+    }
+    .listUL li{
+        border: 1px solid white;
+    }
+
+
+.tracker {
+    position: absolute;
+    display: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.glyphicon {
+    position: absolute;
+	font-size:35px;
+	color:red;
+}
+
+    
+</style>
+
+<body>
+<!-- 지도를 표시할 div 입니다 -->
+<div id="map" style="width:100%;height:50vh;"></div>
+
+<div class="wrapper">
+    <ul class="listUL"></ul>
+</div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dc56ff6a9fc8065d98b43e87a79e20a4"></script>
+<script>
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new daum.maps.LatLng(37.570400, 126.984827), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+    var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new daum.maps.ZoomControl();
+	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+    
+	
+</script>
+
+<!--dao 갖고오기-->
+<script src = "../js/store.js"></script>
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+	
+    
+    function setVisible(visible) {
+        tracker.style.display = visible ? 'block' : 'none';
+    }
+    
+    // trakcer 엘리먼트
+    var tracker = document.createElement('div');
+    tracker.className = 'tracker';
+
+    // 중심 좌표 아이콘
+    var icon = document.createElement('span');
+    icon.className = 'glyphicon glyphicon-map-marker';
+
+    // html에 추가
+    tracker.appendChild(icon);
+    map.getNode().appendChild(tracker);
+	
+	var proj = map.getProjection();	
+    var center = proj.containerPointFromCoords(map.getCenter());
+	console.log("center: " + center);
+    
+	// tracker 중심 위치 설정
+    tracker.style.top = center.y + 'px';
+    tracker.style.left = center.x + 'px';
+    
+    // 일단 안 보이도록. 
+	setVisible(false);
+    
+	var listUL = $(".listUL");
+	var marker;
+	var markers = [];
+	var iwRemoveable = true;
+	var infowindows = [];
+	
+    
+    //false는 버블링만 줄 것이기 때문(캡쳐링? 은 안 주니까 false).
+    //getAttribute~ 는 속성값을 불러오는 것.
+    listUL.on("click", function(e){
+    	console.log("clicked");
+    	
+        var idx = e.target.getAttribute("data-idx");
+        console.log(idx);
+        dao.showMarker(idx);    //클릭하면 showMarker보여주도록.    	
+    });
+    
+    	
+ 	listUL.html("<li><h3>(핀 위치 주소 뜨게 할 것)<h3></li>" + "해당 장소 검색하기");
+    
+    //드래그 중 이벤트 (중심 좌표 이미지 나타나도록 설정)
+    daum.maps.event.addListener(map, 'drag', function() {	        
+		setVisible(true);
+    });
+    
+    //드래그&드랍 시 중심에 가까운 가게 불러오기
+    daum.maps.event.addListener(map, 'dragend', function() {
+     
+    	//생성되어있는 마커 지우기 + 마커 담은 배열 초기화시키기
+    	for (var i = 0; i < markers.length; i++){
+    		markers[i].setMap(null);
+    	};
+    	markers = [];
+        
+    	// 지도 중심좌표를 얻어옵니다
+        var latlng = map.getCenter();
+        //자바스크립트 객체 만들기.가까운 곳 찾는 것
+        var nnstore = dao.findNNStore({lat:latlng.jb, lng:latlng.ib});
+        
+        var iwPosition;
+        var iwContent;
+
+        for(var i = 0; i < 5; i++) {
+        	
+	        marker = new daum.maps.Marker({
+	            position : new daum.maps.LatLng(nnstore[i].lat, nnstore[i].lng),
+	        	clickable : true
+	        });
+        
+	    	iwPosition = new daum.maps.LatLng(nnstore[i].lat, nnstore[i].lng);
+	    	iwContent = '<div style="padding:5px;">' + nnstore[i].title + '<br><a href="http://map.daum.net/link/to/' + nnstore[i].title + ',' + nnstore[i].lat + ',' + nnstore[i].lng + '" style="color:blue" target="_blank">길찾기</a></div>';
+	    	
+	    	// 인포윈도우를 생성하고 지도에 표시
+	    	var infowindow = new daum.maps.InfoWindow({
+	    	    position : iwPosition, 
+	    	    content : iwContent,
+	    	    removable : iwRemoveable
+	    	});
+        	
+        	marker.setMap(map);
+			markers.push(marker);
+			
+		    daum.maps.event.addListener(marker, 'click', makeClickListener(map, markers[i], infowindow));
+			setVisible(false);
+        }; //for end    
+    }); //drag&drop end
+        
+	// 인포윈도우 표시하는 클로저를 만드는 함수
+	function makeClickListener(map, marker, infowindow) {
+	    return function() {
+
+		    infowindows.push(infowindow);
+		    
+		    if(infowindows.length >1 ){
+		    	infowindows[0].close();
+		    	infowindows.splice(0, 1);
+		    }
+	        infowindow.open(map, marker);
+	    };
+	}
+
+});
+</script>
+</body>
+</html>

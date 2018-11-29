@@ -21,6 +21,11 @@ public class SampleController {
 		log.info("login....");
 	}
 	
+	@GetMapping("/map")
+	public void map() {
+		log.info("map.....");
+	}
+	
 	@GetMapping("/gorany")
 	public void sample1(Model model) {
 		

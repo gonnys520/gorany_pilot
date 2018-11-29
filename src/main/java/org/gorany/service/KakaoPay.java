@@ -31,7 +31,7 @@ public class KakaoPay {
 
 		// 서버로 요청할 Header
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", "KakaoAK " + "21e1a296e2c3aabd8c183e424ead22b5");
+		headers.add("Authorization", "KakaoAK " + "044adc3f0bc14dac22901c54c3e37d0b");
 		headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
 		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 
@@ -44,9 +44,9 @@ public class KakaoPay {
 		params.add("quantity", "1");
 		params.add("total_amount", "2100");
 		params.add("tax_free_amount", "100");
-		params.add("approval_url", "http://localhost:8080/kakaopay/kakaoPaySuccess");
-		params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");
-		params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");
+		params.add("approval_url", "http://10.10.10.95:8080/kakaopay/kakaoPaySuccess");
+		params.add("cancel_url", "http://10.10.10.95:8080/kakaoPayCancel");
+		params.add("fail_url", "http://10.10.10.95:8080/kakaoPaySuccessFail");
 		
 		// 서버로 요청할 Body
 //		kakaoPayReadyVO.setCid("TC0ONETIME");
@@ -90,7 +90,7 @@ public class KakaoPay {
 
 		// 서버로 요청할 Header
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", "KakaoAK " + "21e1a296e2c3aabd8c183e424ead22b5");
+		headers.add("Authorization", "KakaoAK " + "044adc3f0bc14dac22901c54c3e37d0b");
 		headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
 		headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 

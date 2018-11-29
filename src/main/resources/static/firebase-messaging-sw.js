@@ -3,7 +3,7 @@ importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
 
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyAKegY8LM_wqmn2twvBsMh0LsvGwsUjS6E",
+  apiKey: "enter apiKey",
   authDomain: "gorany-df5bd.firebaseapp.com",
   databaseURL: "https://gorany-df5bd.firebaseio.com",
   projectId: "gorany-df5bd",

@@ -73,9 +73,4 @@ public class SampleController {
 	
 	}
 	
-	@GetMapping("/firebase/test")
-	public void testFirebase() {
-	
-	}
-
 }

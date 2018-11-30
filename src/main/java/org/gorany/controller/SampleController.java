@@ -16,6 +16,11 @@ public class SampleController {
 	@Setter(onMethod_=@Autowired)
 	private MenuService service;
 	
+	@GetMapping("/speech")
+	public void speech() {
+		log.info("speech.......");
+	}
+	
 	@GetMapping("/login")
 	public void login() {
 		log.info("login....");

@@ -22,6 +22,11 @@ var dao = (function (map){
         {title: '시민식당', lat:37.570921,lng:126.990375},
         {title: '새마을식당', lat:37.569935,lng:126.988884},
         {title: '종로돈까스', lat:37.570611,lng:126.990032},
+        {title: '뚜레쥬르', lat:37.567057, lng:126.992175},
+        {title: '고라니샌드위치', lat:37.566874,lng:126.992797},
+        {title: '고라니카페', lat:37.567571,lng:126.992792},
+        {title: '고라니도시락', lat:37.567405,lng:126.99336},
+        {title: '고라니쥬스', lat:37.566890, lng:126.993377}
     ];
 
     //마커 지우는 역할
@@ -38,6 +43,7 @@ var dao = (function (map){
         for(var obj of origin){
             result.push(obj);
         }
+        console.log("가게 리스트: " + result);
         return result;
     }
 

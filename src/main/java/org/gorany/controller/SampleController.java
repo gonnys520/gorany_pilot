@@ -41,8 +41,12 @@ public class SampleController {
 	}
 	
 	@GetMapping("/home")
-	public void sample3(Model model) {
+	public void sample3(String location, Model model) {
 	
+		log.info("" + location);
+		
+		model.addAttribute("location", location);
+		
 	}
 	
 	@GetMapping("/index")

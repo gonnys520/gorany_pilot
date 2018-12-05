@@ -1,5 +1,7 @@
 package org.gorany.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.gorany.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,6 +77,12 @@ public class SampleController {
 		log.info("payPage....");
 		model.addAttribute("menu", service.getMenu());
 	
+	}
+	
+	@GetMapping("/firebase/test")
+	public void testFirebase(HttpServletRequest request) {
+		log.info("firebase....");
+		
 	}
 	
 }

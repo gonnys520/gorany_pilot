@@ -9,7 +9,7 @@ public class UserVO {
 	private int uno;
 	private String uid;
 	private String upw;
-	private String nickname;
+	private String name, nickname, sex,age;
 	private String email;
 	private String sns_id;
 	private Date regdate;

@@ -8,6 +8,8 @@ spring:
   thymeleaf:
     cache: false
     
+
+    
     
 mybatis:
   config-location: classpath:mybatis-config.xml
@@ -20,4 +22,3 @@ logging:
     org.hibernate: debug
     org.springframework: info
     org.salem: debug
-    

@@ -131,7 +131,7 @@
 
 				<div class="facet f1">
 				<form method="post" action="/kakaoPay">
-					<button class="cartBtn" >결제하기</button>
+					<button class="btn" ><img  src="/imgs/kakao-pay.png"/></button>
 				</form>
 
 
@@ -144,7 +144,15 @@
 	</div>
 
 	<th:block layout:fragment="script">
-		<script th:inline="javascript">
-			
-		</script>
+<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"
+    data-client-id="u86j4ripEt8LRfPGzQ8"
+    data-mode="production"
+    data-merchant-user-key="가맹점 사용자 식별키"
+    data-merchant-pay-key="가맹점 주문 번호"
+    data-product-name="상품명을 입력하세요"
+    data-total-pay-amount="1000"
+    data-tax-scope-amount="1000"
+    data-tax-ex-scope-amount="0"
+    data-return-url="사용자 결제 완료 후 결제 결과를 받을 URL">
+</script>
 	</th:block>

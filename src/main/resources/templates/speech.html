@@ -41,7 +41,7 @@
 	display:block
 	}
 	
-#speech_box .cning{
+#speech_box .text{
 	color:#bbb
 	}
 </style>
@@ -56,7 +56,6 @@
             </div>
         <div class="modal-body">
           <div id="speech_box">
-          <button>START</button>
 			</div>  
         </div>
         <div class="modal-footer"></div>
@@ -84,44 +83,68 @@
 $(document).ready(function () {
 	
 	$('#myModal').modal('show');
+
+	var tempMsg = "";
 	
 	 if(!('webkitSpeechRecognition' in window)) $('#myModal').html('<strong>지원하지 않는 브라우저입니다.</strong>');
-	  else {
+	 
+	  else{
+
 	    var mic = new webkitSpeechRecognition();
 	    mic.continuous = true;
 	    mic.interimResults = true;
 	    mic.lang = 'ko-KR';
+	    
 	    mic.onresult = function(e) {
 	      var b = '', c = false;
 	      for(var i = e.resultIndex; i < e.results.length; ++i) {
 	        b += e.results[i][0].transcript;
 	        c = e.results[i].isFinal;
 	      }
-	      if($('#speech_box .cning').length < 1) $('#speech_box').append('<span class="cning"></span>');
-	      $('#speech_box .cning').text(b);
-	      if(c) $('#speech_box .cning').removeClass('cning');
+	      if($('#speech_box .text').length < 1) $('#speech_box').append('<span class="text"></span>');
+	      $('#speech_box .text').text(b);
+	      if(c) $('#speech_box .text').removeClass('text');
+	      
+	      tempMsg = b;
+	       
 	    };
+
+			    
+	    <!--마이크 end 일 때-->
 	    mic.onend = function() {
+	    	console.log(tempMsg);
+	    	
+	    	<!-- 음성 인식이 돠지 않았을 때 -->
+	    	if (tempMsg = "");
+	    	 alert("음성이 입력되지 않았습니다. 페달을 다시 밟아주세요.");
+	    	 
 	      $('.modal-body').removeClass('on');
 	    };
-	    $(".modal-body").on("click", function () {
+	    
+
+	    <!--마이크 on 일 때-->
+	    $(".modal-body").show(function () {
 	      if($('.modal-body').hasClass('on')) mic.stop();
 	      else {
 	        mic.start();
-	        
 	        console.log("mic start.............")
-	      }
+	        
 	      $('.modal-body').toggleClass('on');
 	      window.setTimeout(function () {
+	    	  	mic.stop();
 		        $("#myModal").modal("hide");
-		    }, 5000);
-		    
+		    },5000);
+
+	      <!-- close else -->
+	      }
+	     
+	    <!-- close function -->
 	    });
-
+	      
+	      
+	  <!-- close else -->
 	  }
-
-	 $('.modal-body').removeClass('on');
-
+	 
 });
 	  
 </script>

@@ -142,7 +142,7 @@
 	<script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new daum.maps.LatLng(37.570400, 126.984827), // 지도의 중심좌표
+            center: new daum.maps.LatLng(37.575801, 126.976720), // 지도의 중심좌표
             level: 3 // 지도의 확대 레벨
         };
     var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -371,9 +371,34 @@ $(document).ready(function(){
 		        
 		    displayMarker(locPosition, message);
 		}
+		
+		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+		function displayMarker(locPosition, message) {
+
+		    // 마커를 생성합니다
+		    var marker = new daum.maps.Marker({  
+		        map: map, 
+		        position: locPosition
+		    }); 
+		    
+		    var iwContent = message, // 인포윈도우에 표시할 내용
+		        iwRemoveable = true;
+
+		    // 인포윈도우를 생성합니다
+		    var infowindow = new daum.maps.InfoWindow({
+		        content : iwContent,
+		        removable : iwRemoveable
+		    });
+		    
+		    // 인포윈도우를 마커위에 표시합니다 
+		    infowindow.open(map, marker);
+		    
+		    // 지도 중심좌표를 접속위치로 변경합니다
+		    map.setCenter(locPosition);      
+		}    
 
 		//초기 마커 불러오기. 
-		//markerVisable();
+		markerVisable();
 
 		//드래그&드랍 시 중심에 가까운 가게 불러오기
 		daum.maps.event.addListener(map, 'dragend', function() {

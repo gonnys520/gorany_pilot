@@ -2,7 +2,11 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{/layout/layout1}">
 
-
+<head>
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+<!-- default header name is X-CSRF-TOKEN -->
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
 <div layout:fragment="content">
 
 	
@@ -302,6 +306,7 @@
 	</div>
 </div>
 
+	
 <!-- Portfolio Modals -->
 
 <!-- end content -->
@@ -335,9 +340,21 @@ function getLocation() {
 	<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDbCTxE0H-50KkxbQsinxaN9EIpDoXA5Qk&ver=3.exp"></script>
 	<script th:inline="javascript">
 	
-	
+
 	$(document).ready(function(){
 		
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		
+		console.log(token);
+		console.log(header);
+	
+	    $.ajaxSetup({
+	        beforeSend: function(xhr) {
+	            xhr.setRequestHeader(header, token);
+	        }
+	    });
+        
 		//검색창 자동완성
 		function display(data){
 			$( "#tags" ).autocomplete({
